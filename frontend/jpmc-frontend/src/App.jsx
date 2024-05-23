@@ -1,8 +1,6 @@
 import './App.css'
-import React from 'react'
-import Home from './Components/Home'
 import Navbar from './Components/Navbar'
-import Login from './Pages/Login'
+
 function App() {
   
   return (
