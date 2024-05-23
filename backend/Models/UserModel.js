@@ -16,7 +16,7 @@ const UserSchema = new mongoose.Schema({
   },
   roles: {
     isAdmin : {type:Boolean,default:false},
-    isPatient : {type:Boolean,default:false},
+    isPatient : {type:Boolean,default:true},
     isDoctor : {type:Boolean,default:false}
   }
 
