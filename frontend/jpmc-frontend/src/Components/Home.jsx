@@ -1,6 +1,6 @@
 import React from "react";
-import photo from "../assets/photo.avif";
-import ex1 from "../assets/ex1.avif";
+
+import temp from '../assets/ex1.avif'
 const Home = () => {
   return (
     <div className="flex justify-evenly items-center w-auto h-auto bg-gradient-to-r from-indigo-100 from-10% via-sky-200 via-30% to-emerald-100">
@@ -19,7 +19,7 @@ const Home = () => {
         <div className="mt-7 flex justify-center items-center gap-14">
           <div className="pb-8">
             <h1 className="text-4xl border-b-orange-300 border-b-4">30+</h1>
-            <p className="mt-2">years of experience</p>
+            <p className="mt-2">Years of experience</p>
           </div>
           <div className="pb-8">
             <h1 className="text-4xl border-b-violet-300 border-b-4">15+</h1>
@@ -27,14 +27,14 @@ const Home = () => {
           </div>
           <div className="pb-8">
             <h1 className="text-4xl border-b-green-300 border-b-4">100%</h1>
-            <p className="mt-2">parent satisfaction</p>
+            <p className="mt-2">Patient satisfaction</p>
           </div>
         </div>
         
       </div>
       <div>
           <div className="">
-            <img className="w-96 h-auto rounded-full shadow-2xl" src={ex1} />
+            <img className="w-96 h-auto rounded-full shadow-2xl" src={temp} />
           </div>
         </div>
     </div>
