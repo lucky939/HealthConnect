@@ -1,15 +1,14 @@
 // import React from 'react'
 
-import { useContext, useState } from "react";
+import { useState } from "react";
 import login from "../assets/login.avif";
 import { Link, useNavigate } from "react-router-dom";
-import { Auth } from "../Contexts/AuthContext";
+// import { Auth } from "../Contexts/AuthContext";
 
 const Signup = () => {
   const [userName,setUserName] = useState("");
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
-  const {dispatch} = useContext(Auth);
   const nav = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -26,10 +25,7 @@ const Signup = () => {
   
       const data = await user.json();
       if(user.ok){
-        console.log('Login Succesfull',data);
-        localStorage.setItem("token",data.token);
-        dispatch({type:'LOGIN',payload:data.token})
-        nav("/dashboard")
+        nav("/login")
       } else {
         console.log(data.message);
       }

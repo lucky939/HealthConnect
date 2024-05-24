@@ -11,6 +11,7 @@ function App() {
   return (
     <>
     <Navbar />
+    {/* <Home /> */}
     <hr className='bg-slate-400 h-[1px]'/>
    
       <Routes>

@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useEffect, useState } from "react";
-import login from "../assets/login.avif";
+import login from "../assets/signup.avif";
 import { Auth } from "../Contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -14,13 +15,13 @@ const [role,setRole] = useState({
 })
 const {dispatch} = useContext(Auth);
 const nav = useNavigate();
-// const {token} = useContext(Auth)
+const {user} = useContext(Auth)
 
-// useEffect(()=>{
-//   if(token !== null){
-//     nav("/dashboard")
-//   }
-// })
+useEffect(()=>{
+  if(user !== null){
+    nav("/dashboard")
+  }
+})
 
 const handleSubmit = async (e) => {
   e.preventDefault()
@@ -38,7 +39,8 @@ const handleSubmit = async (e) => {
     if(user.ok){
       console.log('Login Succesfull',data);
       localStorage.setItem("token",data.token);
-      dispatch({type:'LOGIN',payload:data})
+      localStorage.setItem("role",data.r)
+      dispatch({type:'LOGIN',payload:{token:data.token,role:data.r}})
       nav("/dashboard")
     } else {
       console.log(data.message);
@@ -64,7 +66,7 @@ const handleChange = (e) => {
     <div className="flex justify-center items-center gap-10 mt-7">
       <img className="w-1/3 h-auto" src={login} />
       <div className="flex flex-col justify-center items-center">
-        <h1 className="text-2xl font-semibold text-slate-700">Create an Account</h1>
+        <h1 className="text-2xl font-semibold text-slate-700">Login to Account</h1>
         <form className="shadow-2xl flex flex-col justify-center mt-4 items-center border-2 rounded-lg w-96 gap-6 py-7">
           <div className="flex flex-col justify-start items-center gap-4">
             <p className='mr-[185px]'>Enter username</p>
