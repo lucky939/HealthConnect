@@ -1,5 +1,4 @@
-import React from "react";
-import photo from "../assets/photo.avif";
+// import React from "react";
 import ex1 from "../assets/ex1.avif";
 const Home = () => {
   return (
@@ -27,7 +26,7 @@ const Home = () => {
           </div>
           <div className="pb-8">
             <h1 className="text-4xl border-b-green-300 border-b-4">100%</h1>
-            <p className="mt-2">parent satisfaction</p>
+            <p className="mt-2">Parent satisfaction</p>
           </div>
         </div>
         
