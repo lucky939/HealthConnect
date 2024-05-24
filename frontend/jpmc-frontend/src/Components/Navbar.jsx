@@ -1,6 +1,7 @@
 // import React from 'react'
 // import Logo from '../assets/react.svg'
 import  { Ambulance} from 'lucide-react'
+
 import { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Auth } from '../Contexts/AuthContext'
@@ -23,8 +24,8 @@ const Navbar = () => {
     <div className='drop-shadow-lg flex justify-around items-center w-auto h-20 bg-gradient-to-r from-indigo-100 from-10% via-sky-200 via-30% to-emerald-100 text-slate-800'>
       
       <div className='flex justify-center items-center'>
-        <Ambulance className='w-20 h-16'/>
-        <h2 className='font-bold'>HealthCare<br></br>Info</h2>
+        <Ambulance className='w-20 h-16 cursor-pointer'/>
+        <h2 className='font-bold cursor-pointer'>HealthCare<br></br>Info</h2>
       </div>
       <ul className='flex justify-center items-center gap-10'>
         <Link to='/'  className='hover:border-b-2 border-slate-600 cursor-pointer text-md'>Home</Link>
