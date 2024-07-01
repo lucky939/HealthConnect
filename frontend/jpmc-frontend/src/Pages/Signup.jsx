@@ -1,8 +1,9 @@
 // import React from 'react'
 
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import login from "../assets/login.avif";
 import { Link, useNavigate } from "react-router-dom";
+import { Auth } from "../Contexts/AuthContext";
 // import { Auth } from "../Contexts/AuthContext";
 
 const Signup = () => {
@@ -10,6 +11,14 @@ const Signup = () => {
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
   const nav = useNavigate();
+
+  const {user} = useContext(Auth);
+
+  useEffect(()=>{
+    if(user){
+      nav("/dashboard");
+    }
+  },[])
 
   const handleSubmit = async (e) => {
     e.preventDefault()

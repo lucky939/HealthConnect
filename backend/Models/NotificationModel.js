@@ -8,6 +8,10 @@ const notificationSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, 
         ref: "Doctor", 
     },
+    appointmentId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Appointment",
+    },
     message: {
         type:String,
         required:true,

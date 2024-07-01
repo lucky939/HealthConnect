@@ -5,6 +5,20 @@ const e = require("express");
 
 require("dotenv").config();
 
+const addAdmin = async(req,res) => {
+  try {
+    const {userName,password,email} = req.body;
+    const user = await UserModel.findOne({userName});
+    const hash = await bcrypt.hash(password, 10);
+    if(user) return res.status(400).json({msg:"User already exists"});
+    const newUser = new UserModel({userName,password:hash,email,roles:{isAdmin:true}});
+    await newUser.save()
+    res.json({message:"Admin added successfully"});
+  } catch (error) {
+    res.status(500).json({ message: "admin is not added !!" });
+  }
+}
+
 const register = async (req, res) => {
   try {
     const { userName, password, email, roles } = await req.body;
@@ -63,4 +77,4 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { register, login };
+module.exports = { register, login, addAdmin };

@@ -2,8 +2,8 @@ const NotificationModel = require("../Models/NotificationModel");
 
 const getNotifications = async (req,res) => {
     try {
-        const doctorId = req.user._id;
-        const notifications = await NotificationModel.find({doctorId,markAsRead : false})
+        const userId = req.user._id;
+        const notifications = await NotificationModel.find({userId,markAsRead : false})
         return res.status(200).json({notifications});
     } catch (error) {
         return res.status(400).json(error);

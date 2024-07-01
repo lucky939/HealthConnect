@@ -1,8 +1,8 @@
 import React from "react";
-import photo from "../assets/aboutUs.avif";
+// import photo from "../assets/aboutUs.avif";
 const AboutUs = () => {
   return (
-    <div className="bg-gradient-to-r from-indigo-100 from-10% via-sky-200 via-30% to-emerald-100">
+    <div className="bg-gradient-to-r h-screen from-indigo-100 from-10%  via-sky-200 via-30% to-emerald-100 flex flex-col justify-center items-center ">
       <h1 className="text-3xl text-center text-blue-600 font-semibold">
         About Us
       </h1>
