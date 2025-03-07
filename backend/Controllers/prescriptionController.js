@@ -4,6 +4,9 @@
 
 
 const PrescriptionModel = require("../Models/PrescriptionModel");
+const AppointmentModel = require('../models/AppointmentModel'); 
+const UserModel = require('../models/UserModel');
+const { generatePrescriptionPDF, sendPrescriptionEmail } = require('./prescriptiongen');
 
 const addPrescription = async (req, res) => {
     try {
@@ -11,17 +14,41 @@ const addPrescription = async (req, res) => {
         console.log(patientId);
         const doctorId = req.user._id; 
         console.log(doctorId);
-        const {patientName,medicines, dosages, cause } = req.body; 
+
+
+
+         const appointment = await AppointmentModel.findOne({ patientId });
+         if (!appointment) {
+         return res.status(404).json({ "error": "Appointment not found" });
+         }
+
+        const patient = await UserModel.findById(patientId);
+        if (!patient) {
+            return res.status(404).json({ "error": "Patient not found" });
+        }
+        const email = patient.email;
+
+        console.log(email)
+
+
+        const {patientName, age, cause, medicines, dosages, specialInstructions } = req.body; 
         const prescription = new PrescriptionModel({
             patientId,
             doctorId,
             patientName,
+            age,
             medicines,
             dosages,
             cause,
+            specialInstructions,
             issuedOn : new Date().toLocaleDateString()
         });
         await prescription.save();
+
+        const pdfPath = await generatePrescriptionPDF(prescription);
+        await sendPrescriptionEmail(email, pdfPath);
+
+
         return res.status(200).json({ "message": "Prescription is Added" });
     } catch (error) {
         return res.status(500).json(error);

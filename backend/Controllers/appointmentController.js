@@ -3,6 +3,7 @@ const DoctorModel = require("../Models/DoctorModel");
 const NotificationModel = require("../Models/NotificationModel");
 const UserModel = require("../Models/UserModel");
 const moment = require('moment-timezone')
+const sendEmail = require("./sendemail");
 
 const bookAppointment =async (req,res) => {
     try {
@@ -124,8 +125,13 @@ const upDateAppointment = async (req, res) => {
       const doctor = appointment.doctorId;
       console.log(doctor);
   
-      const message = `Your appointment with ${doctor.name} is ${status}`;
-  
+      const message = `Dear ${patient.userName},\n\nYour appointment with Dr. ${doctor.name} has been ${status}.\n\n📅 Appointment Time: ${appointment.startTime}\n\nThank you for using Health Connect.`;
+      
+
+      if (status === "Accepted") {
+        await sendEmail(patient.email, "Appointment Confirmation", message);
+      }
+
       const notification = await NotificationModel.findOne({
         userId: appointment.patientId,
         doctorId: appointment.doctorId._id, 
@@ -136,7 +142,7 @@ const upDateAppointment = async (req, res) => {
         notification.message = message;
         await notification.save();
       }
-  
+
       return res.status(200).json({ "message": "Appointment Updated Successfully" });
     } catch (error) {
       return res.status(500).json({ error });
@@ -151,7 +157,8 @@ const appointmentNotification = async(req,res) => {
     try {
         const appointments = await AppointmentModel.find({status:'Pending'})
             .populate('patientId', 'userName')
-            .populate('doctorId', 'userName');
+            .populate('doctorId', 'name');
+            console.log(appointments)
         return res.status(200).json(appointments);
     } catch (error) {
         return res.status(500).json({ error: error.message });
